@@ -4,20 +4,20 @@ id_pattern = re.compile(r'^.\d+$')
 
 class Config(object):
     # pyro client config
-    API_ID    = os.environ.get("API_ID", "") #⚠️ Required
-    API_HASH  = os.environ.get("API_HASH", "") #⚠️ Required
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "") #⚠️ Required
+    API_ID    = os.environ.get("API_ID", "28357285") #⚠️ Required
+    API_HASH  = os.environ.get("API_HASH", "c83581d7b4aee9fc71325b9d6afac67b") #⚠️ Required
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "6917754267:AAGBgIuKDZj1RQuT4hCoUjPcI3x3wuiHqdk") #⚠️ Required
    
     # database config
     DB_NAME = os.environ.get("DB_NAME","Snow_User_Data")     
-    DB_URL  = os.environ.get("DB_URL","") #⚠️ Required
+    DB_URL  = os.environ.get("DB_URL","mongodb+srv://TEST:TEST@cluster0.ehigmtx.mongodb.net/?retryWrites=true&w=majority") #⚠️ Required
  
     # other configs
     BOT_UPTIME  = time.time()
-    START_PIC   = os.environ.get("START_PIC", "")
-    ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '').split()] #⚠️ Required
-    FORCE_SUB   = os.environ.get("FORCE_SUB", "") #⚠️ Required Username without @
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "")) #⚠️ Required
+    START_PIC   = os.environ.get("START_PIC", "https://telegra.ph/file/fae821386dbaa47b0eecd.jpg")
+    ADMIN       = [int(admin) if id_pattern.search(admin) else admin for admin in os.environ.get('ADMIN', '6662759443').split()] #⚠️ Required
+    FORCE_SUB   = os.environ.get("FORCE_SUB", "A_Shop_For_Killers_Eng") #⚠️ Required Username without @
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1001971176803")) #⚠️ Required
     FLOOD = int(os.environ.get("FLOOD", '10'))
     BANNED_USERS = set(int(x) for x in os.environ.get("BANNED_USERS", "1234567890").split())
 

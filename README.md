@@ -1,12 +1,12 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-# 𝗥𝗘𝗡𝗔𝗠𝗘 𝗦𝗡𝗢𝗪 𝗣𝗥𝗢 𝗕𝗢𝗧
+# 𝐒𝐈𝐆𝐌𝐀 𝐒𝐍𝐎𝐖 𝐁𝐎𝐓
 
 
-### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Snow Rename Bot)
+### Sᴀᴍᴩʟᴇ Bᴏᴛ (Official Sɪɢᴍᴀ Sɴᴏᴡ Bᴏᴛ)
 
 <p align="center">
-🤖 <a href="https://t.me/RenameSnowProBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RENAMESNOWPRO&message=BOT&color=blue-green"></a> 🤖
+🤖 <a href="https://t.me/SigmaSnowBot"><img title="Telegram" src="https://img.shields.io/static/v1?label=RENAMESNOWPRO&message=BOT&color=blue-green"></a> 🤖
 </p>
 
 
@@ -66,3 +66,6 @@ restart - To Rrstart The Bot (Admin Only)
 status - Check Bot Status (Admin Only)
 broadcast - Send Message To All Users (Admin Only)
 ```
+
+## Created By ❄️
+- `Snowball` 

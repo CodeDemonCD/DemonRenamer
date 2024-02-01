@@ -1,12 +1,22 @@
 FROM python:3.10.6
+
+# Create directory for the bot
 RUN mkdir /bot && chmod 777 /bot
 WORKDIR /bot
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt -qq update && \
-    apt -qq install -y git wget pv jq python3-dev ffmpeg mediainfo neofetch && \
-    apt-get install wget -y -f && \
-    apt-get install fontconfig -y -f
 
+# Set environment variable to prevent interactive prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt -qq update && \
+    apt -qq install -y git wget pv jq python3-dev ffmpeg mediainfo neofetch fontconfig && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy application files
 COPY . .
+
+# Install Python dependencies
 RUN pip3 install -r requirements.txt
-CMD ["bash", "run.sh"]
+
+# Set the default command to run the script with argument
+CMD ["bash", "run.sh", "install", "latest", "ffmpeg"]

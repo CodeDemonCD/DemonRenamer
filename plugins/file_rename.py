@@ -94,7 +94,7 @@ async def doc(bot, update):
     except Exception as e:
         return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @Snowball_Official\nError: {e}")
 
-    file_path = f"downloads/{new_filename}"
+    file_path = f"Renames/{new_filename}"
     metadata_path = f"Metadata/{new_filename}"
     file = update.message.reply_to_message
 

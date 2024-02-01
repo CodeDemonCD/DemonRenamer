@@ -10,4 +10,3 @@ services:
       FORCE_SUB: $FORCE_SUB
       LOG_CHANNEL: $LOG_CHANNEL
       DB_URL: $DB_URL
-      START_PIC: $START_PIC

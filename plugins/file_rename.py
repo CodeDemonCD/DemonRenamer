@@ -6,10 +6,13 @@ from hachoir.parser import createParser
 from helper.utils import progress_for_pyrogram, convert, humanbytes
 from helper.database import db
 from PIL import Image
+import asyncio
 import os
 import time
 
 # Define a function to handle the 'rename' callback
+
+
 @Client.on_callback_query(filters.regex('rename'))
 async def rename(bot, update):
     await update.message.delete()
@@ -18,6 +21,8 @@ async def rename(bot, update):
                                     reply_markup=ForceReply(True))
 
 # Define the main message handler for private messages with replies
+
+
 @Client.on_message(filters.private & filters.reply)
 async def refunc(client, message):
     reply_message = message.reply_to_message
@@ -49,14 +54,21 @@ async def refunc(client, message):
 
         # Use a single call to reply with both text and inline keyboard
         await message.reply(
-            text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-** `{new_name}`",
+            text=f"**Sᴇʟᴇᴄᴛ Tʜᴇ Oᴜᴛᴩᴜᴛ Fɪʟᴇ Tyᴩᴇ**\n**• Fɪʟᴇ Nᴀᴍᴇ :-**  `{new_name}`",
             reply_to_message_id=file.id,
             reply_markup=InlineKeyboardMarkup(button)
         )
 
 # Define the callback for the 'upload' buttons
+
+
 @Client.on_callback_query(filters.regex("upload"))
 async def doc(bot, update):
+
+    # Creating Directory for Metadata
+    if not os.path.isdir("Metadata"):
+        os.mkdir("Metadata")
+
     # Extracting necessary information
     prefix = await db.get_prefix(update.message.chat.id)
     suffix = await db.get_suffix(update.message.chat.id)
@@ -83,6 +95,7 @@ async def doc(bot, update):
         return await update.message.edit(f"⚠️ Something went wrong can't able to set Prefix or Suffix ☹️ \n\n❄️ Contact My Creator -> @Snowball_Official\nError: {e}")
 
     file_path = f"downloads/{new_filename}"
+    metadata_path = f"Metadata/{new_filename}"
     file = update.message.reply_to_message
 
     ms = await update.message.edit("⚠️__**Please wait...**__\n\n**Tʀyɪɴɢ Tᴏ Dᴏᴡɴʟᴏᴀᴅɪɴɢ....**")
@@ -122,13 +135,37 @@ async def doc(bot, update):
         img.resize((320, 320))
         img.save(ph_path, "JPEG")
 
-    await ms.edit("⚠️__**Please wait...**__\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
+    _bool_metadata = await db.get_metadata(update.message.chat.id)
+
+    if (_bool_metadata):
+        metadata = await db.get_metadata_code(update.message.chat.id)
+        if metadata:
+
+            await ms.edit("I Fᴏᴜɴᴅ Yᴏᴜʀ Mᴇᴛᴀᴅᴀᴛᴀ\n\n__**Pʟᴇᴀsᴇ Wᴀɪᴛ...**__\n**Aᴅᴅɪɴɢ Mᴇᴛᴀᴅᴀᴛᴀ Tᴏ Fɪʟᴇ....**")
+            cmd = f"""ffmpeg -i "{path}" {metadata} "{metadata_path}" """
+
+            process = await asyncio.create_subprocess_shell(
+                cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+            )
+
+            stdout, stderr = await process.communicate()
+            er = stderr.decode()
+
+            try:
+                if er:
+                    return await ms.edit(str(er) + "\n\n**Error**")
+            except BaseException:
+                pass
+        await ms.edit("**Metadata added to the file successfully ✅**\n\n⚠️ __**Please wait...**__\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
+    else:
+        await ms.edit("⚠️__**Please wait...**__\n\n**Tʀyɪɴɢ Tᴏ Uᴩʟᴏᴀᴅɪɴɢ....**")
+
     type = update.data.split("_")[1]
     try:
         if type == "document":
             await bot.send_document(
                 update.message.chat.id,
-                document=file_path,
+                document=metadata_path if _bool_metadata else file_path,
                 thumb=ph_path,
                 caption=caption,
                 progress=progress_for_pyrogram,
@@ -136,7 +173,7 @@ async def doc(bot, update):
         elif type == "video":
             await bot.send_video(
                 update.message.chat.id,
-                video=file_path,
+                video=metadata_path if _bool_metadata else file_path,
                 caption=caption,
                 thumb=ph_path,
                 duration=duration,
@@ -145,7 +182,7 @@ async def doc(bot, update):
         elif type == "audio":
             await bot.send_audio(
                 update.message.chat.id,
-                audio=file_path,
+                audio=metadata_path if _bool_metadata else file_path,
                 caption=caption,
                 thumb=ph_path,
                 duration=duration,
@@ -155,9 +192,19 @@ async def doc(bot, update):
         os.remove(file_path)
         if ph_path:
             os.remove(ph_path)
+        if metadata_path:
+            os.remove(metadata_path)
+        if path:
+            os.remove(path)
         return await ms.edit(f" Eʀʀᴏʀ {e}")
 
     await ms.delete()
+    if metadata_path:
+        os.remove(metadata_path)
+    
+    if path:
+        os.remove(path)
+        
     os.remove(file_path)
     if ph_path:
         os.remove(ph_path)

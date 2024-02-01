@@ -11,6 +11,8 @@
     "File Rename"
   ],
   "repository": "https://github.com/Snowball-0/RenameSnowProBot",
+  "success_url": "",
+  "stack": "container",
   "env": {
     "API_ID": {
       "description": "Your APP ID From my.telegram.org ",
@@ -59,10 +61,5 @@
       "value": "",
       "required": false
     }
-  },
-  "buildpacks": [
-    {
-      "url": "heroku/python"
-    }
-  ]
+  }
 }

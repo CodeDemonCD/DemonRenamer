@@ -69,6 +69,15 @@ Exᴀᴍᴩʟᴇ:- /set_caption 📕 Fɪʟᴇ Nᴀᴍᴇ: {filename}
 ❗ 𝗔𝗻𝘆 𝗢𝘁𝗵𝗲𝗿 𝗛𝗲𝗹𝗽 𝗖𝗼𝗻𝘁𝗮𝗰𝘁 :- <a href=https://t.me/Snowball_official>𝑺𝑼𝑷𝑷𝑶𝑹𝑻</a>
 """
 
+    SEND_METADATA = """
+❪ SET CUSTOM METADATA ❫
+
+☞ Fᴏʀ Exᴀᴍᴘʟᴇ:-
+
+◦ <code> -map 0 -c:s copy -c:a copy -c:v copy -metadata title="Powered By:- @Kdramaland" -metadata author="@Snowball_Official" -metadata:s:s title="Subtitled By :- @Kdramaland" -metadata:s:a title="By :- @Kdramaland" -metadata:s:v title="By:- @Snowball_Official" </code>
+
+📥 Fᴏʀ Hᴇʟᴘ Cᴏɴᴛ. @Snowball_Official
+
 
     PROGRESS_BAR = """<b>\n
 ╭━━━━❰ᴘʀᴏɢʀᴇss ʙᴀʀ❱━➣

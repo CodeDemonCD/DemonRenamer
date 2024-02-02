@@ -6,11 +6,11 @@ class Config(object):
     # pyro client config
     API_ID    = os.environ.get("API_ID", "19961805") #⚠️ Required
     API_HASH  = os.environ.get("API_HASH", "442e8a8935be904835c018703e18d20a") #⚠️ Required
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "") #⚠️ Required
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "6643982336:AAFi7tLOeyBM8PqmsNU6FR9YHyXXsMpQ0V0") #⚠️ Required
    
     # database config
     DB_NAME = os.environ.get("DB_NAME","Snow_User_Data")     
-    DB_URL  = os.environ.get("DB_URL","") #⚠️ Required
+    DB_URL  = os.environ.get("DB_URL","mongodb+srv://mafiatamilan7:YASH@cluster0.1vqnvqf.mongodb.net/?retryWrites=true&w=majority") #⚠️ Required
  
     # other configs
     BOT_UPTIME  = time.time()
